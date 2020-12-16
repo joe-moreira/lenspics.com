@@ -2,6 +2,7 @@ package views
 
 import (
 	"html/template"
+	"net/http"
 	"path/filepath"
 )
 
@@ -15,6 +16,12 @@ var (
 type View struct {
 	Template *template.Template
 	Layout   string
+}
+
+// Render is cool
+func (v *View) Render(w http.ResponseWriter,
+	data interface{}) error {
+	return v.Template.ExecuteTemplate(w, v.Layout, data)
 }
 
 // NewView opa
